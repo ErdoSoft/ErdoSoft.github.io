@@ -1,0 +1,4 @@
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$r = Invoke-WebRequest -Uri ("https://raw.githubusercontent.com/ErdoSoft/SHS_Setup/main/install.ps1?cb=" + [DateTimeOffset]::UtcNow.ToUnixTimeSeconds()) -UseBasicParsing
+$s = if ($r.Content -is [byte[]]) { [System.Text.Encoding]::UTF8.GetString($r.Content) } else { [string]$r.Content }
+Invoke-Expression $s
